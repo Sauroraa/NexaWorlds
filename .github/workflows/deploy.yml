@@ -1,0 +1,29 @@
+name: Deploy NexaWorlds
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /opt/nexaworlds
+            git pull origin main
+            cd docker
+            docker compose down
+            docker compose build --no-cache
+            docker compose up -d
+            docker compose exec backend npx prisma migrate deploy --schema=../prisma/schema.prisma
+            echo "Deployment completed at $(date)"

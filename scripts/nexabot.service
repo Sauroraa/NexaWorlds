@@ -1,0 +1,20 @@
+[Unit]
+Description=NexaBot Discord
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/NexaBot
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=10
+
+# Environment variables
+Environment=DISCORD_TOKEN=YOUR_TOKEN
+Environment=API_URL=http://localhost:3001/api
+Environment=API_KEY=YOUR_API_KEY
+
+[Install]
+WantedBy=multi-user.target

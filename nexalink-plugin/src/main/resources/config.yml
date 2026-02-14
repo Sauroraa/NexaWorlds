@@ -1,0 +1,16 @@
+# NexaLink Configuration
+api:
+  url: "http://localhost:3001/api"
+  key: "nxl_change-this-to-your-api-key"
+  timeout: 5000
+
+sync:
+  tps-interval: 60        # secondes
+  players-interval: 30    # secondes
+  status-interval: 120    # secondes
+
+security:
+  hmac-secret: "change-this-hmac-secret"
+  allowed-ips:
+    - "127.0.0.1"
+    - "0.0.0.0"

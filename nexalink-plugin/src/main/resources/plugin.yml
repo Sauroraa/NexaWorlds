@@ -1,0 +1,18 @@
+name: NexaLink
+version: '${project.version}'
+main: fr.nexaworlds.nexalink.NexaLink
+api-version: '1.21'
+description: Bridge entre NexaWorlds API et serveurs Minecraft
+author: NexaWorlds
+website: https://nexaworlds.fr
+
+commands:
+  nexalink:
+    description: Commandes NexaLink
+    usage: /nexalink <reload|status|sync>
+    permission: nexalink.admin
+
+permissions:
+  nexalink.admin:
+    description: Accès admin NexaLink
+    default: op

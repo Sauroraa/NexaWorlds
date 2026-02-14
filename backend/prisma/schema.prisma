@@ -292,15 +292,19 @@ model ServerControl {
 
 model RecruitmentScore {
   id          String   @id @default(uuid())
+  applicationId String?
   userId      String
   username    String
   discordId   String
+  criteria    String?
   score       Int      @default(0)
-  criteria1   Int      @default(0)
-  criteria2   Int      @default(0)
-  criteria3   Int      @default(0)
-  criteria4   Int      @default(0)
-  criteria5   Int      @default(0)
+  notes       String?  @db.Text
+  evaluatedBy String?
+  score1      Int      @default(0)
+  score2      Int      @default(0)
+  score3      Int      @default(0)
+  score4      Int      @default(0)
+  score5      Int      @default(0)
   totalScore  Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

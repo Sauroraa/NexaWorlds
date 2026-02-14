@@ -268,6 +268,8 @@ model ReputationHistory {
   type        RepType
   createdAt   DateTime @default(now())
 
+  user        Reputation @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
   @@map("reputation_history")
 }
 

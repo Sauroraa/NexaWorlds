@@ -65,7 +65,7 @@ echo -e "${YELLOW}[5/8] Téléchargement du projet...${NC}"
 
 cd /var/www
 rm -rf nexaworlds.fr
-git clone --depth 1 https://github.com/Sauronaa/NexaWorlds.git nexaworlds.fr
+git clone --depth 1 https://github.com/Sauroraa/NexaWorlds.git nexaworlds.fr
 
 # Copie bot
 cp -r /var/www/nexaworlds.fr/nexabot /home/NexaBot
@@ -77,6 +77,16 @@ cp -r /var/www/nexaworlds.fr/docker /var/www/nexaworlds.fr/docker
 echo -e "${YELLOW}[6/8] Configuration...${NC}"
 
 # Backend .env
+if [ ! -f "/var/www/nexaworlds.fr/backend/.env" ]; then
+    cp /var/www/nexaworlds.fr/backend/.env.example /var/www/nexaworlds.fr/backend/.env 2>/dev/null || true
+fi
+
+# Bot .env
+if [ ! -f "/home/NexaBot/.env" ]; then
+    cp /var/www/nexaworlds.fr/nexabot/.env.example /home/NexaBot/.env 2>/dev/null || true
+fi
+
+# Create env if not exist
 cat > /var/www/nexaworlds.fr/backend/.env << 'ENDBACKEND'
 DATABASE_URL="mysql://nexaworlds:nexaworlds_password@mariadb:3306/nexaworlds"
 REDIS_URL=redis://redis:6379

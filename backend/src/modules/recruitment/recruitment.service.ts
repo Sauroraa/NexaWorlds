@@ -73,9 +73,21 @@ export class RecruitmentService {
     notes?: string;
     evaluatedBy: string;
   }) {
+    // Get application data
+    const application = await this.prisma.staffApplication.findUnique({
+      where: { id: applicationId },
+    });
+
+    if (!application) {
+      throw new Error('Application not found');
+    }
+
     await this.prisma.recruitmentScore.create({
       data: {
         applicationId,
+        userId: application.userId,
+        username: application.username,
+        discordId: application.discord,
         criteria: data.criteria,
         score: data.score,
         notes: data.notes,

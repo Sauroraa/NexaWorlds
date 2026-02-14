@@ -289,3 +289,21 @@ model ServerControl {
 
   @@map("server_controls")
 }
+
+model RecruitmentScore {
+  id          String   @id @default(uuid())
+  userId      String
+  username    String
+  discordId   String
+  score       Int      @default(0)
+  criteria1   Int      @default(0)
+  criteria2   Int      @default(0)
+  criteria3   Int      @default(0)
+  criteria4   Int      @default(0)
+  criteria5   Int      @default(0)
+  totalScore  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("recruitment_scores")
+}

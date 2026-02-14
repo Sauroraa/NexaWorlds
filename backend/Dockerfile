@@ -1,7 +1,7 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package.json ./
+RUN npm install
 COPY . .
 COPY ../prisma ../prisma
 RUN npx prisma generate --schema=../prisma/schema.prisma
@@ -14,5 +14,5 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./
 
-EXPOSE 3001
+EXPOSE 3020
 CMD ["node", "dist/main"]
